@@ -1,8 +1,15 @@
 ''' server-monitoring'''
 import time
+import sys
 import datetime
 import psutil
 import pymysql
+
+def hiki():
+    h = sys.argv
+    hikisu=h[1]
+    return hikisu
+
 def instartdb(time1,mem_used,mem_total,disk_used,disk_total):
     '''
     instartdb はサーバの状態を取得してdbに出力する為の機能
@@ -24,8 +31,9 @@ def instartdb(time1,mem_used,mem_total,disk_used,disk_total):
     con.commit()
     cur.close()
     con.close()
+hikisu = hiki()
 while True:
-    time.sleep(60)
+    time.sleep(int(hikisu))
     dt_now = datetime.datetime.now()
     time1=dt_now.strftime('%H:%M')
     mem = psutil.virtual_memory()
