@@ -22,6 +22,21 @@ pymysql<br>
     dsk_used=dsk.used//ディスク使用料
     dsk_total=dsk.total//ディスクの容量
 ```
+秒数のデフォルトを変更する.
+
+```
+def hiki():
+    '''
+    プログラム実行時に引数を取得してメインプログラムへ返します.
+    '''
+    p_h1 = sys.argv
+    if(len(sys.argv) <= 1):
+        print('デフォルト60秒になります.')
+        hikisu = 60 //ここの秒数を変更するとデフォルトが変わる.
+        return hikisu
+    print(p_h1)
+    return hikisu
+```
 ## データベースの設定
 ```
     con = pymysql.connect(
