@@ -6,8 +6,15 @@ import psutil
 import pymysql
 
 def hiki():
-    h = sys.argv
-    hikisu=h[1]
+    '''
+    プログラム実行時に引数を取得してメインプログラムへ返します.
+    '''
+    p_h1 = sys.argv
+    if(len(sys.argv) <= 1):
+        print('デフォルト60秒になります.')
+        hikisu = 60
+        return hikisu
+    print(p_h1)
     return hikisu
 
 def instartdb(time1,mem_used,mem_total,disk_used,disk_total):
@@ -31,6 +38,7 @@ def instartdb(time1,mem_used,mem_total,disk_used,disk_total):
     con.commit()
     cur.close()
     con.close()
+
 hikisu = hiki()
 while True:
     time.sleep(int(hikisu))
@@ -43,4 +51,3 @@ while True:
     dsk_used=dsk.used
     dsk_total=dsk.total
     instartdb(time1,mem_used,mem_total,dsk_used,dsk_total)
-    
