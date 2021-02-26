@@ -40,3 +40,4 @@ python test.py 秒数
 EX）
 python test.py 60 //秒数
 ```
+引数を設定しない場合には60秒で実行するように変更.
