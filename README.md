@@ -13,14 +13,32 @@
 ## 現状の仕様
 システムを止める時には,プロセス側から落とすこととしている.
 ```
-    dt_now = datetime.datetime.now()
-    time1=dt_now.strftime('%H:%M')//時間
-    mem = psutil.virtual_memory()
-    mem_used=mem.used//メモリ使用料
-    mem_total=mem.total//トータルメモリ
-    dsk = psutil.disk_usage('/')
-    dsk_used=dsk.used//ディスク使用料
-    dsk_total=dsk.total//ディスクの容量
+dc = daemon.DaemonContext(stdout=sys.stdout)
+stop_time=hiki()
+p_stoptime= stop_time
+def main():
+    '''
+    mainプログラム
+    '''
+    while True:
+        dt_now = datetime.datetime.now()
+        now_time=dt_now.strftime('%H:%M')
+        mem = psutil.virtual_memory()
+        mem_used=mem.used
+        mem_total=mem.total
+        dsk = psutil.disk_usage('/')
+        dsk_used=dsk.used
+        dsk_total=dsk.total
+        print(dsk_total)
+        con=db_connect()
+        cur = con.cursor()
+        query="INSERT INTO monitoring (time,mem_used,mem_total,dsk_used,dsk_total) \
+            VALUES (%s,%s,%s,%s,%s) ;"
+        cur.execute(query, (now_time,mem_used,mem_total,dsk_used,dsk_total))
+        con.commit()
+        cur.close()
+        con.close()
+        time.sleep(p_stoptime)
 ```
 秒数のデフォルトを変更する.
 
