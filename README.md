@@ -39,15 +39,20 @@ def hiki():
 ```
 ## データベースの設定
 ```
+def db_connect():
+    '''
+    データベース設定
+    '''
     con = pymysql.connect(
-            host='127.0.0.1',//IPアドレス
-            user='root',//user名
-            password='root',//pass
-            db='seerver_m',//データベース名
-            port= 13306,//ポート指定
+            host='127.0.0.1',
+            user='root',
+            password='root',
+            db='seerver_m',
+            port= 13306,
             charset='utf8',
             cursorclass=pymysql.cursors.DictCursor,
         )
+    return con
 ```
 ## 実行方法
 ```
