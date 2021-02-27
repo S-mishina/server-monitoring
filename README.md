@@ -15,6 +15,7 @@ nohup python3 instart_monitoring.py $1 &
 *  psutil
 *  pymysql
 
+
 ## メインの機能
 <b>サーバのメモリ使用料,ディスク使用料をデータベースに書き込む.
 
