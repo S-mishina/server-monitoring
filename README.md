@@ -1,11 +1,11 @@
 # server-monitoring
 ## 使用ライブラリ
-
-time<br>
-sys<br>
-datetime<br>
-psutil<br>
-pymysql<br>
+* time
+*  sys
+*  datetime
+*  daemon
+*  psutil
+*  pymysql
 
 ## メインの機能
 <b>サーバのメモリ使用料,ディスク使用料をデータベースに書き込む.
