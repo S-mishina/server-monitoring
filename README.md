@@ -4,7 +4,7 @@
 ```
 #!/bin/sh
 
-nohup python3 instart_monitoring.py 1 &
+nohup python3 instart_monitoring.py $1 &
 ```
 こうすることでsshが落ちてもプログラムは動き続ける.
 ## 使用ライブラリ
