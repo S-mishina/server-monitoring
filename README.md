@@ -1,4 +1,12 @@
 # server-monitoring
+
+## プログラム実行の為のshell
+```
+#!/bin/sh
+
+nohup python3 instart_monitoring.py 1 &
+```
+こうすることでsshが落ちてもプログラムは動き続ける.
 ## 使用ライブラリ
 * time
 *  sys
