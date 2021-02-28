@@ -1,5 +1,6 @@
 # server-monitoring
-* instart_monitoring データベース書き込み
+* instart_monitoring.py データベース書き込み
+* select_monitoring.py データベース取得
 # instart_monitoring
 
 ## プログラム実行の為のshell
