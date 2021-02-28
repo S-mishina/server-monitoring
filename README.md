@@ -83,9 +83,13 @@ def db_connect():
 ```
 ## 実行方法
 ```
+python側から実行をかける場合
+
 python test.py 秒数
 EX）
 python test.py 60 //秒数
+
+shell側から実行をかける場合
 ```
 引数を設定しない場合には60秒で実行するように変更.
 
