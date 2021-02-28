@@ -90,6 +90,10 @@ EX）
 python test.py 60 //秒数
 
 shell側から実行をかける場合
+
+#!/bin/sh
+
+nohup python3 instart_monitoring.py $1 &
 ```
 引数を設定しない場合には60秒で実行するように変更.
 
