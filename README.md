@@ -11,6 +11,8 @@ nohup python3 instart_monitoring.py $1 &
 ```
 こうすることでsshが落ちてもプログラムは動き続ける.
 ## 使用ライブラリ
+* ThreadPoolExecutor
+* schedule
 * time
 *  sys
 *  datetime
@@ -25,9 +27,23 @@ nohup python3 instart_monitoring.py $1 &
 ## 現状の仕様
 システムを止める時には,プロセス側から落とすこととしている.
 ```
-dc = daemon.DaemonContext(stdout=sys.stdout)
-stop_time=hiki()
-p_stoptime= stop_time
+def job():
+    '''
+    jobの設定
+    例えば,データベースを消去するとか...
+    '''
+    print(datetime.datetime.now())
+    print("I'm working...") 
+
+def Regular():
+    '''
+    マルチプロセスである時間の時に処理を行うためのプログラム
+    '''
+    schedule.every(1).minutes.do(job)
+    while True:
+        schedule.run_pending()
+
+
 def main():
     '''
     mainプログラム
@@ -41,12 +57,12 @@ def main():
         dsk = psutil.disk_usage('/')
         dsk_used=dsk.used
         dsk_total=dsk.total
-        print(dsk_total)
+        cpu=psutil.cpu_percent()
         con=db_connect()
         cur = con.cursor()
-        query="INSERT INTO monitoring (time,mem_used,mem_total,dsk_used,dsk_total) \
-            VALUES (%s,%s,%s,%s,%s) ;"
-        cur.execute(query, (now_time,mem_used,mem_total,dsk_used,dsk_total))
+        query="INSERT INTO monitoring (time,mem_used,mem_total,dsk_used,dsk_total,cpu) \
+            VALUES (%s,%s,%s,%s,%s,%s) ;"
+        cur.execute(query, (now_time,mem_used,mem_total,dsk_used,dsk_total,cpu))
         con.commit()
         cur.close()
         con.close()
