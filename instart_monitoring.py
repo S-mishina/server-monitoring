@@ -7,6 +7,7 @@ import psutil
 import pymysql
 import schedule
 import daemon
+import select_monitoring
 
 dc = daemon.DaemonContext(stdout=sys.stdout)
 
@@ -45,7 +46,8 @@ def job():
     例えば,データベースを消去するとか...
     '''
     print(datetime.datetime.now())
-    print("I'm working...") 
+    print("プログラムを実行します.")
+    select_monitoring.select()
 
 def Regular():
     '''
@@ -66,15 +68,16 @@ def main():
         mem = psutil.virtual_memory()
         mem_used=mem.used
         mem_total=mem.total
+        mem_percent=(mem.used/mem.total)*100
         dsk = psutil.disk_usage('/')
         dsk_used=dsk.used
         dsk_total=dsk.total
         cpu=psutil.cpu_percent()
         con=db_connect()
         cur = con.cursor()
-        query="INSERT INTO monitoring (time,mem_used,mem_total,dsk_used,dsk_total,cpu) \
-            VALUES (%s,%s,%s,%s,%s,%s) ;"
-        cur.execute(query, (now_time,mem_used,mem_total,dsk_used,dsk_total,cpu))
+        query="INSERT INTO monitoring (time,mem_used,mem_total,dsk_used,dsk_total,cpu,mem_percent) \
+            VALUES (%s,%s,%s,%s,%s,%s,%s) ;"
+        cur.execute(query, (now_time,mem_used,mem_total,dsk_used,dsk_total,cpu,mem_percent))
         con.commit()
         cur.close()
         con.close()

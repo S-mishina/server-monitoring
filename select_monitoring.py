@@ -14,12 +14,17 @@ def db_connect():
             cursorclass=pymysql.cursors.DictCursor,
         )
     return con
-con=db_connect()
-cur = con.cursor()
-query="select * From monitoring ;"
-cur.execute(query)
-test = cur.fetchall()
-cur.close()
-con.close()
-print(test[1]['time'])
-print(test[1]['mem_used'])
+
+def select():
+    con=db_connect()
+    cur = con.cursor()
+    query="SELECT avg(cpu),avg(mem_percent) FROM monitoring;"
+    cur.execute(query)
+    test = cur.fetchall()
+    cur.close()
+    con.close()
+    print("cpu(avg):"+str(round(test[0]['avg(cpu)']))+"%")
+    print("mem(avg)"+str(round(test[0]['avg(mem_percent)']))+"%")
+    
+if __name__ == '__main__':
+    select()
