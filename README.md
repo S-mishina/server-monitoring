@@ -22,7 +22,11 @@ nohup python3 instart_monitoring.py $1 &
 *  daemon
 *  psutil
 *  pymysql
-# GUI画面
+
+## 可視化について
+現状,ノートpc等で実行する時には,instart_monitoring.pyを実行した時に<br>
+select_monitoring.pyを同時に実行し,ターミナル上でCPU,メモリの使用率を確認することができる.
+<img width="393" alt="スクリーンショット 2021-03-04 23 24 28" src="https://user-images.githubusercontent.com/45090872/109978037-ce73b300-7d40-11eb-9cb9-7f26baa14bb0.png">
 
 ## メインの機能
 <b>サーバのメモリ使用料,ディスク使用料をデータベースに書き込む.
