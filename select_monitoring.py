@@ -1,4 +1,6 @@
 import pymysql
+import numpy as np
+import matplotlib.pyplot as plt
 
 def db_connect():
     '''
@@ -28,3 +30,4 @@ def select():
     
 if __name__ == '__main__':
     select()
+    

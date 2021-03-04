@@ -48,12 +48,28 @@ def job():
     print(datetime.datetime.now())
     print("プログラムを実行します.")
     select_monitoring.select()
+    
+def job1():
+    '''
+    jobの設定
+    例えば,データベースを消去するとか...
+    '''
+    print(datetime.datetime.now())
+    print("データベース消去を行います")
+    con=db_connect()
+    cur = con.cursor()
+    query="DELETE FROM monitoring;"
+    cur.execute(query)
+    con.commit()
+    cur.close()
+    con.close()
 
 def Regular():
     '''
     マルチプロセスである時間の時に処理を行うためのプログラム
     '''
     schedule.every(1).minutes.do(job)
+    schedule.every().day.at("23:59").do(job1)
     while True:
         schedule.run_pending()
 
@@ -82,6 +98,7 @@ def main():
         cur.close()
         con.close()
         time.sleep(p_stoptime)
+
 
 with dc:
     stop_time=hiki()
