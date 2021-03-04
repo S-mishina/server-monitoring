@@ -83,6 +83,37 @@ def hiki():
     print(p_h1)
     return hikisu
 ```
+## データベースのリセットについて
+毎日23:59分にデータがリセットされるように修正を加える.
+
+```
+def job1():
+    '''
+    jobの設定
+    例えば,データベースを消去するとか...
+    '''
+    print(datetime.datetime.now())
+    print("データベース消去を行います")
+    con=db_connect()
+    cur = con.cursor()
+    query="DELETE FROM monitoring;"
+    cur.execute(query)
+    con.commit()
+    cur.close()
+    con.close()
+```
+
+```
+def Regular():
+    '''
+    マルチプロセスである時間の時に処理を行うためのプログラム
+    '''
+    schedule.every(1).minutes.do(job)
+    schedule.every().day.at("23:59").do(job1)#時間の設定をここで行うことができる.
+    while True:
+        schedule.run_pending()
+```
+
 ## データベースの設定
 ```
 def db_connect():
