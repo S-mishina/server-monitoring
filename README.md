@@ -1,3 +1,6 @@
+# GUI画面
+
+
 # server-monitoring
 * instart_monitoring.py データベース書き込み
 * select_monitoring.py データベース取得
